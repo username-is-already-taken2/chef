@@ -1,6 +1,4 @@
-# encoding: utf-8
-
-name 'train'
+name 'train-core'
 
 dependency 'ruby'
 dependency 'rubygems'
@@ -8,8 +6,8 @@ dependency 'bundler'
 dependency 'appbundler'
 
 license :project_license
-default_version 'add-gcp-transport'
-source git: 'https://github.com/chef-partners/train.git'
+default_version 'miah/train_core'
+source git: 'https://github.com/chef/train.git'
 skip_transitive_dependency_licensing true
 
 build do
