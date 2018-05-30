@@ -28,6 +28,8 @@ class Chef::Util::Windows::NetUse < Chef::Util::Windows
     @use_name = localname
   end
 
+  attr_reader :use_name
+
   def to_ui2_struct(use_info)
     use_info.inject({}) do |memo, (k, v)|
       memo["ui2_#{k}".to_sym] = v
@@ -73,9 +75,5 @@ class Chef::Util::Windows::NetUse < Chef::Util::Windows
     Chef::ReservedNames::Win32::Net.net_use_del(nil, use_name, :use_noforce)
   rescue Chef::Exceptions::Win32APIError => e
     raise ArgumentError, e
-  end
-
-  def use_name
-    @use_name
   end
 end

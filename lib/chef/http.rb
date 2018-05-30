@@ -283,9 +283,7 @@ class Chef
     # DEPRECATED: This is only kept around to provide access to cache control data in
     # lib/chef/provider/remote_file/http.rb
     # FIXME: Find a better API.
-    def last_response
-      @last_response
-    end
+    attr_reader :last_response
 
     private
 

@@ -295,9 +295,7 @@ class Chef
       Array(self[:roles]).include?(role_name)
     end
 
-    def primary_runlist
-      @primary_runlist
-    end
+    attr_reader :primary_runlist
 
     attr_writer :override_runlist
     def override_runlist(*args)
