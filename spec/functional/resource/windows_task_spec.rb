@@ -71,6 +71,17 @@ describe Chef::Resource::WindowsTask, :windows_only do
         expect(current_resource.task.parameters).to eq("-W -L C:\\\\chef\\\\chef-ad-join.log")
       end
 
+      # https://github.com/chef/chef/issues/7413
+      it "creates scheduled task and sets command arguments with spaces in the argument" do
+        subject.command "powershell.exe -file \"C:\\Program Files\\app\\script.ps1\""
+        call_for_create_action
+        # loading current resource again to check new task is creted and it matches task parameters
+        current_resource = call_for_load_current_resource
+        expect(current_resource.exists).to eq(true)
+        expect(current_resource.task.application_name).to eq("powershell.exe")
+        expect(current_resource.task.parameters).to eq("-file \"C:\\Program Files\\app\\script.ps1\"")
+      end
+
       it "does not converge the resource if it is already converged" do
         subject.command "chef-client -W -L 'C:\\chef\\chef-ad-join.log'"
         subject.run_action(:create)
