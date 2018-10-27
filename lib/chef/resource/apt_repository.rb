@@ -62,14 +62,16 @@ class Chef
 
       property :keyserver, [String, nil, FalseClass],
                description: "The GPG keyserver where the key for the repo should be retrieved.",
-               default: "keyserver.ubuntu.com"
+               default: "keyserver.ubuntu.com",
+               desired_state: false
 
       property :key, [String, Array, nil, FalseClass],
                description: "If a keyserver is provided, this is assumed to be the fingerprint; otherwise it can be either the URI of GPG key for the repo, or a cookbook_file.",
                default: lazy { [] }, coerce: proc { |x| x ? Array(x) : x }
 
       property :key_proxy, [String, nil, FalseClass],
-               description: "If set, a specified proxy is passed to GPG via http-proxy=."
+               description: "If set, a specified proxy is passed to GPG via http-proxy=.",
+               desired_state: false
 
       property :cookbook, [String, nil, FalseClass],
                description: "If key should be a cookbook_file, specify a cookbook where the key is located for files/default. Default value is nil, so it will use the cookbook where the resource is used.",
